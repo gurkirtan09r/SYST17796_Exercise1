@@ -1,67 +1,61 @@
 package exercise1;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
- * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
- * It then searches the array of cards for the match to the user's card. 
- * To be used as starting code in Exercise
- *
- * @author dancye
- * @author Paul Bonenfant Jan 25, 2022 
+ * A class that fills an array of 7 cards with random Card Objects
+ * and then asks the user to pick a card and searches the array to
+ * see if the card is in the array.
+ * 
+ * @author Gurkirtan Singh
+ * @date October 4, 2026
  */
 public class CardTrick {
     
     public static void main(String[] args) {
+        Card[] magicHand = new Card[7];
+        Random random = new Random();
         
-        Card[] hand = new Card[7];
-
-        for (int i = 0; i < hand.length; i++) {
-            Card card = new Card();
-            //card.setValue(insert call to random number generator here)
-            // 
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
-            // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
-            //       Don't worry about duplicates at this point
+        // Fill magicHand array with 7 random cards
+        for (int i = 0; i < magicHand.length; i++) {
+            Card c = new Card();
+            c.setValue(random.nextInt(13) + 1); // Random value 1 to 13
+            c.setSuit(Card.SUITS[random.nextInt(4)]); // Pick random suit index (0 to 3)
+            magicHand[i] = c;
         }
-
-        // insert code to ask the user for Card value and suit, create their card
-        // and search the hand here. 
-        // Hint: You can ask for values 1 to 10, and then
-        //       11 for jack, 12 for queen, etc. (remember arrays are 0-based though)
-        //       1 for Hearts, 2 for Diamonds, etc. (remember arrays are 0-based though)
-        // 
-        // Then loop through the cards in the array to see if there's a match.
         
-        // If the guess is successful, invoke the printInfo() method below.
+        // Ask user to pick a card
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a card value (1 - 13): ");
+        int userValue = input.nextInt();
         
+        System.out.print("Enter a suit index (0 for Hearts, 1 for Diamonds, 2 for Spades, 3 for Clubs): ");
+        int suitIndex = input.nextInt();
+        String userSuit = Card.SUITS[suitIndex];
+        
+        // Search the array for the user's card
+        boolean found = false;
+        for (Card card : magicHand) {
+            if (card.getValue() == userValue && card.getSuit().equalsIgnoreCase(userSuit)) {
+                found = true;
+                break;
+            }
+        }
+        
+        // Report result
+        if (found) {
+            System.out.println("Congratulations! Your card is in the magic hand.");
+            printInfo();
+        } else {
+            System.out.println("Sorry, your card was not in the magic hand.");
+        }
     }
-
+    
     /**
-     * A simple method to print out personal information. Follow the instructions to 
-     * replace this information with your own.
-     * @author Paul Bonenfant Jan 2022
+     * A simple method to print author info.
      */
     private static void printInfo() {
-    
-        System.out.println("Congratulations, you guessed right!");
-        System.out.println();
-        
-        System.out.println("My name is Paul, but you can call me prof, Paul or sir");
-        System.out.println();
-        
-        System.out.println("My career ambitions:");
-        System.out.println("-- Be more active on LinkedIn");
-        System.out.println("-- Have a semester with no violations of academic integrity!");
-	System.out.println();	
-
-        System.out.println("My hobbies:");
-        System.out.println("-- Investing");
-        System.out.println("-- Cooking");
-        System.out.println("-- Reading/Watching TV");
-        System.out.println("-- Riding my motorcycle");
-
-        System.out.println();
-        
-    
+        System.out.println("Author: Gurkirtan Singh");
     }
-
 }
