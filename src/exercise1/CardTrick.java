@@ -57,9 +57,10 @@ public class CardTrick {
      */
     
     private static void printInfo() {
+        // i am done !
         System.out.println("Hello, my name is Gurkirtan Singh!");
         System.out.println("I am a Computer Programming student at Sheridan College.");
         System.out.println("I enjoy software development, networking, and fitness.");
-    }
+    } 
     
 }
